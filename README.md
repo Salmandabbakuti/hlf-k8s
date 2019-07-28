@@ -5,12 +5,11 @@ Hyperledger fabric on kubernetes
 
 ### Setup
 
+Create a K8s cluster
 -Kubernetes Statefulset type 3-pod cluster on GKE
 1. orderer Pod
 2. Acme-peer Pod
 3. Budget-Peer Pod
-
-Create a K8s cluster
 
 Connect your cluster with the cloud shell
 
