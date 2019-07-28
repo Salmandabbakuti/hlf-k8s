@@ -68,7 +68,7 @@ kubectl exec -it budget-peer-0 /bin/bash
 ./cc-test.sh install  #installs chaincode on budget-peer
 
 ```
-### Invoking and Querying Chaincode
+### 3. Invoking and Querying Chaincode
 
 ```
 kubectl exec -it acme-peer-0 /bin/bash
