@@ -5,7 +5,7 @@ Hyperledger fabric on kubernetes
 #### Setup-minikube-Windows 
 
 ##### Pre-requisites
-1. minikube(https://github.com/kubernetes/minikube/releases/latest)
+1. minikube(https://github.com/kubernetes/minikube/releases/latest/download/minikube-installer.exe)
 2. kubectl (https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/windows/amd64/kubectl.exe)
 3. Virtual box(must have virtualization enabled)
 
