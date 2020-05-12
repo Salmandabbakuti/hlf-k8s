@@ -1,9 +1,47 @@
 # hlf-k8s
 Hyperledger fabric on kubernetes
->Credit goes to acloudfan
+###### Credits:wave: [aclodfan](https://github.com/acloudfan)
 
+#### Setup-minikube-Windows 
 
-### Setup
+##### Pre-requisites
+1. minikube(https://github.com/kubernetes/minikube/releases/latest)
+2. kubectl (https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/windows/amd64/kubectl.exe)
+3. Virtual box(must have virtualization enabled)
+
+>Rename downloaded minikube file to minikube.exe and add those downloaded files(minikube.exe and kubectl.exe) to your PATH.
+
+##### Steps
+1. Create minikube cluster
+
+```
+minikube start --memory=4096
+
+```
+2. Add storage class for minikube
+```
+git clone https://github.com/acloudfan/HLF-K8s-Cloud.git
+cd HLF-K8s-Cloud
+```
+
+ >create a file ```k8s-storage-class.yaml``` with the contents below  in the root directory where all other yaml files are located.
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: general
+# Adjust provisioner for the cloud setup
+provisioner: k8s.io/minikube-hostpath 
+parameters:
+  type: pd-ssd
+```
+
+3. Launch the pods
+```
+kubectl apply -f .
+```
+[Next Steps](#Starting-Network)
+### Setup-GKE Cloud
 
 Create a K8s cluster
 
@@ -29,9 +67,9 @@ kubectl apply -f .  #Containerizes Three Pods with .yaml files in Repository
 
 ```
 
--Starting Fabric Network
+### Starting-Network
 
-1. Setup Channel and Joining Channel
+##### 1. Setup Channel and Joining Channel
 
 ```
 kubectl exec -it acme-peer-0 /bin/bash # Allows you to logging into acme-Peer container cli
@@ -43,7 +81,7 @@ kubectl exec -it acme-peer-0 /bin/bash # Allows you to logging into acme-Peer co
 peer channel list  #Checks if Peer joined
 exit
 ```
--Budget-Peer Joining Channel 
+- Budget-Peer Joining Channel 
 
 ```
 kubectl exec -it budget-peer-0 /bin/bash 
@@ -57,7 +95,7 @@ peer channel list
 exit 
 ```
 
-### 2. Installing And Instantiating Chaincode
+##### 2. Installing And Instantiating Chaincode
 
 ```
 kubectl exec -it acme-peer-0 /bin/bash
@@ -69,7 +107,7 @@ kubectl exec -it budget-peer-0 /bin/bash
 ./cc-test.sh install  #installs chaincode on budget-peer
 
 ```
-### 3. Invoking and Querying Chaincode
+##### 3. Invoking and Querying Chaincode
 
 ```
 kubectl exec -it acme-peer-0 /bin/bash
